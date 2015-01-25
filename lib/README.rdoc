@@ -1,14 +1,14 @@
-= NgiAPI {<img src="https://secure.travis-ci.org/sparklemotion/mechanize.png?rvm=1.9.3" />}[http://travis-ci.org/sparklemotion/mechanize]
+= NgiAPI {<img src="https://travis-ci.org/blacksd/ngi_api.png?rvm=1.9.3" />}[https://travis-ci.org/blacksd/ngi_api]
 
-* http://docs.seattlerb.org/mechanize
-* https://github.com/sparklemotion/mechanize
+* https://github.com/blacksd/ngi_api
+* https://rubygems.org/gems/ngi_api
 
 == Description
 
-The NgiAPI gem is used for accessing NGI's APIs for resellers through simple 
-object methods rather than directly-built SOAP calls. Return values are parsed and
-presented as a hash.
-We currently support all API operations:
+This library is a convenient, easy way to access NGI's API for resellers - simple 
+object methods vs. custom SOAP calls. There are multiple built-in checks for type corrections, and
+the entered values are automatically adjusted. Return values are parsed and presented as a hash.
+This gem currently supports all API operations:
 * list_bts
 * list_comuni
 * info_bts
@@ -16,68 +16,30 @@ We currently support all API operations:
 * reboot_radio
 * set_ethernet
 
-
 == Dependencies
 
 * rubyntlm version 0.3.2 or newer
 * savon[http://savonrb.com/] version 2
 
-# == Support:
-# 
-# The bug tracker is available here:
-# 
-# * https://github.com/sparklemotion/mechanize/issues
+== Support:
+
+The bug tracker is available here: https://github.com/blacksd/ngi_api/issues
 
 == Examples
 
-If you are just starting, check out the GUIDE[http://docs.seattlerb.org/mechanize/GUIDE_rdoc.html] or
-the EXAMPLES[http://docs.seattlerb.org/mechanize/EXAMPLES_rdoc.html] file.
+With arguments as a hash, cast a 
 
-== Developers
+	MyNGIAccess = NgiAPI.new(arguments)
 
-To run the tests for the first time:
-
-  bundle install
-
-This will install all the required dependencies for running the tests.  For
-subsequent test runs:
-
-  rake test
-
-You can also use +autotest+ from the ZenTest gem to run tests.
-
-See also Mechanize::TestCase to read about the built-in testing
-infrastructure.
+and use the instance methods. 
 
 == Authors
 
-Copyright (c) 2005 by Michael Neumann (mneumann@ntecs.de)
+Copyright (c) 2015 by Marco Bulgarini (marco.bulgarini@com-net.it)
 
-Copyright (c) 2006-2011:
-
-* {Aaron Patterson}[http://tenderlovemaking.com] (aaronp@rubyforge.org)
-* {Mike Dalessio}[http://mike.daless.io] (mike@csa.net)
-
-Copyright (c) 2011-2013:
-
-* {Eric Hodel}[http://blog.segment7.net] (drbrain@segment7.net)
-* {Akinori MUSHA}[http://blog.akinori.org] (knu@idaemons.org)
-* {Lee Jarvis}[http://twitter.com/lee_jarvis] (ljjarvis@gmail.com)
-
-This library comes with a shameless plug for employing me
-(Aaron[http://tenderlovemaking.com/]) programming Ruby, my favorite language!
-
-== Acknowledgments
-
-This library was heavily influenced by its namesake in the Perl world.  A big
-thanks goes to {Andy Lester}[http://petdance.com],
-the author of the original Perl module WWW::Mechanize which is available
-here[http://search.cpan.org/dist/WWW-Mechanize/].  Ruby Mechanize would not be around without you!
-
-Thank you to Michael Neumann for starting the Ruby version.  Thanks to everyone
-who's helped out in various ways.  Finally, thank you to the people using this
-library!
+This library is the second attempt in using Ruby at something practical. If you
+think I did a good job, let me know!
 
 == License
 
-This library is distributed under the MIT license.  Please see the LICENSE[http://docs.seattlerb.org/mechanize/LICENSE_rdoc.html] file.
+This library is distributed under the MIT license.

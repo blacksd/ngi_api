@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.platform      = Gem::Platform::RUBY
   spec.authors       = ["Marco Bulgarini"]
   spec.email         = ["marco.bulgarini@com-net.it"]
-  spec.summary       = "NGI official APIs"
-  spec.description   = "A ruby way to access NGI APIs."
-  spec.homepage      = "http://rubygems.org/gems/ngi_api"
+  spec.summary       = "NGI's API"
+  spec.description   = "A ruby implementation of NGI's API"
+  spec.homepage      = "https://rubygems.org/gems/ngi_api"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -21,10 +21,10 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "rspec", "~> 3.1"
 
   # spec.add_runtime_dependency "digest"    # no need to add stdlib!
   # spec.add_runtime_dependency "net/http"  # no need to add stdlib!
   spec.add_runtime_dependency "rubyntlm", "~> 0.3.2"
-  spec.add_runtime_dependency "savon"
+  spec.add_runtime_dependency "savon", "~> 2.0.0"
 end

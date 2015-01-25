@@ -1,20 +1,10 @@
 # encoding: utf-8
 
 require "digest"
-# gem "rubyntlm", "~> 0.3.2"
+# gem "rubyntlm", "~> 0.3.2" # no "gems" in here! Dependencies go through gemspec. 
 require "rubyntlm"
 require "savon"
 require "net/http"
-
-# This class is a convenient, easy way to access
-# the APIs provided by NGI without manually having
-# to build and submit SOAP requests. There are 
-# multiple built-in checks for type corrections, and
-# the entered values are automatically adjusted.
-#
-# Author::    Marco Bulgarini  (mailto:marco.bulgarini@com-net.it)
-# Copyright:: Copyright (c) 2015 Com Net S.a.s.
-# License::   Distributes under the same terms as Ruby
 
 # This is the main class, holding all of the functions
 # and checks. The instance it's built with a hash of arguments.

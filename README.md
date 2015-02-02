@@ -1,6 +1,13 @@
 # NgiApi
 
-TODO: Write a gem description
+This library is a convenient, easy way to access NGI's API for resellers - simple object methods vs. custom SOAP calls. There are multiple built-in checks for type corrections, and the entered values are automatically adjusted. Return values are parsed and presented as a hash.
+This gem currently supports all API operations:
+* list_bts
+* list_comuni
+* info_bts
+* info_radio
+* reboot_radio
+* set_ethernet
 
 ## Installation
 
@@ -20,11 +27,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+See documentation!
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/ngi_api/fork )
+1. Fork it ( https://github.com/blacksd/ngi_api/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

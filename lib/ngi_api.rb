@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 require "digest"
-# gem "rubyntlm", "~> 0.3.2" # no "gems" in here! Dependencies go through gemspec. 
+# gem "rubyntlm", "~> 0.3.2" # no "gems" in here! Dependencies go in gemspec. 
 require "rubyntlm"
 require "savon"
 require "net/http"
@@ -85,9 +85,9 @@ class NgiAPI
     # call-seq:
     #   MyNGIAccess.infoBts(btsID) => {...}    
     #  
-    # Obtain the exact informations about a specific BTS. btsID is a non-negative integer.
+    # Obtain the exact informations about a specific BTS. btsID is a non-negative integer, number or string
     def infoBts(btsID)
-        raise ArgumentError, "btsID value not allowed" unless btsID.to_i > 0 && btsID.class.to_s == "Fixnum"
+        raise ArgumentError, "btsID value not allowed" unless btsID.to_i > 0 && btsID.to_s[/\A[-+]?\d+\z/] === btsID.to_s # kudos to http://stackoverflow.com/a/1235990/2513430
         build_and_send_query(:info_bts,
             {
                 btsID: parameter_to_string(btsID)
@@ -125,7 +125,7 @@ class NgiAPI
     #  
     # Obtain the istat code for the town.
     def listComuni(comune)
-        raise ArgumentError, "comune is not >=2 and <= 35 in length, or has not allowed characters" unless is_valid_comune(parameter_to_string(comune))
+        raise ArgumentError, "comune is not >= 2 and <= 35 in length, or has not allowed characters" unless is_valid_comune(parameter_to_string(comune))
         build_and_send_query(:list_comuni,
             {
                 comune: parameter_to_string(comune)
@@ -171,6 +171,11 @@ class NgiAPI
     # formats the login for the request, upcasing it 
     def fix_login(login)
         login.upcase
+    end
+
+    # check if string is integer
+    def is_i?
+       /\A[-+]?\d+\z/ === self
     end
 
     # Download the 'cacert.pem' file from "curl.haxx.se" if not found in the running directory

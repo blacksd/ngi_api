@@ -33,12 +33,14 @@ class NgiAPI
 		@partnerPassword = !!args[:test] ? "517fc7b578767ebfa6bb5252252653d2" : parameter_to_string(args[:partnerPassword])
         fetch_cacert unless File.exist?('cacert.pem')
         @soapClient = Savon.client do
-          wsdl !!args[:test] ? "https://www.eolo.it/ws/wsdl/?test" : "https://www.eolo.it/ws/wsdl"
+          wsdl !!args[:test] ? "https://www.eolo.it/ws/wsdl/?test" : "https://www.eolo.it/ws/wsdl/"
           ssl_ca_cert_file "cacert.pem"
-          if args[:debug]
+          if !!args[:debug]
             log true 
             log_level :debug 
             pretty_print_xml true
+          else
+            log false
           end
         end
 	end
@@ -161,7 +163,7 @@ class NgiAPI
         )
     end
 
-    private
+    private # ------------------
 
     # formats the mac address for the request, stripping separators and upcasing it
     def fix_mac_address(mac)
@@ -203,28 +205,34 @@ class NgiAPI
         checksum = @partnerLogin
 
         case type
-        when :info_bts
-            checksum += params[:btsID]
-            message[:btsID] = params[:btsID]
-        when :list_comuni
-            checksum += params[:comune]
-            message[:comune] = params[:comune]
-        when :set_ethernet
-            checksum += params[:macAddress]
-            checksum += params[:statoEthernet]
-            message[:macAddress] = params[:macAddress]
-            message[:statoEthernet] = params[:statoEthernet]
-        when :reboot_radio
-            checksum += params[:macAddress]
-            message[:macAddress] = params[:macAddress]
-        when :info_radio
-            checksum += parameter_to_string(params[:macAddressList])
-            checksum += parameter_to_string(params[:clientLoginList])
-            message[:macAddressList] = {items: params[:macAddressList]}
-            message[:clientLoginList] = {items: params[:clientLoginList]}
-        when :list_bts # no input needed
+            when :info_bts
+                checksum += params[:btsID]
+                message[:btsID] = params[:btsID]
+            when :list_comuni
+                checksum += params[:comune]
+                message[:comune] = params[:comune]
+            when :set_ethernet
+                checksum += params[:macAddress]
+                checksum += params[:statoEthernet]
+                message[:macAddress] = params[:macAddress]
+                message[:statoEthernet] = params[:statoEthernet]
+            when :reboot_radio
+                checksum += params[:macAddress]
+                message[:macAddress] = params[:macAddress]
+            when :info_radio
+                checksum += parameter_to_string(params[:macAddressList])
+                checksum += parameter_to_string(params[:clientLoginList])
+                message[:macAddressList] = {items: params[:macAddressList]}
+                message[:clientLoginList] = {items: params[:clientLoginList]}
+            when :info_coverage
+                checksum += params[:via]
+                checksum += params[:civico]
+                checksum += params[:istat]
+                message[:via] = params[:via]
+                message[:civico] = params[:civico]
+                message[:istat] = params[:istat]
+            when :list_bts # no input needed
         end
-        
         message[:controlHash] = Digest::MD5.hexdigest(checksum+@partnerPassword)
         @soapClient.call(type, message: message).to_hash[(type.to_s+"_response").to_sym]
     end
